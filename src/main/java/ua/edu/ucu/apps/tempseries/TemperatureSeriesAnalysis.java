@@ -49,7 +49,7 @@ public class TemperatureSeriesAnalysis {
         }
 
         double minTemp = temperatureSeries[0];
-        for (double value : temperatureSeries){
+        for (double value : temperatureSeries) {
             if (value < minTemp) {
                 minTemp = value;
             }
@@ -64,7 +64,7 @@ public class TemperatureSeriesAnalysis {
         }
 
         double maxTemp = 0;
-        for (double value : temperatureSeries){
+        for (double value : temperatureSeries) {
             if (value > maxTemp) {
                 maxTemp = value;
             }
@@ -83,9 +83,9 @@ public class TemperatureSeriesAnalysis {
         }
         
         double closest = temperatureSeries[0];
-        for (double value : temperatureSeries){
-            if (Math.abs(value - tempValue) < Math.abs(closest - tempValue) ||
-                (Math.abs(value - tempValue) == Math.abs(closest - tempValue) 
+        for (double value : temperatureSeries) {
+            if (Math.abs(value - tempValue) < Math.abs(closest - tempValue) 
+            || (Math.abs(value - tempValue) == Math.abs(closest - tempValue) 
                 && value > closest)) {
                 closest = value;
             }
@@ -95,15 +95,18 @@ public class TemperatureSeriesAnalysis {
     }
 
     public double[] findTempsLessThen(double tempValue) {
-        return Arrays.stream(temperatureSeries).filter(value -> value < tempValue).toArray();
+        return Arrays.stream(temperatureSeries).filter(value -> value 
+        < tempValue).toArray();
     }
 
     public double[] findTempsGreaterThen(double tempValue) {
-        return Arrays.stream(temperatureSeries).filter(value -> value >= tempValue).toArray();
+        return Arrays.stream(temperatureSeries).filter(value -> value 
+        >= tempValue).toArray();
     }
 
     public double[] findTempsInRange(double lowerBound, double upperBound) {
-        return Arrays.stream(temperatureSeries).filter(value -> value >= lowerBound 
+        return Arrays.stream(temperatureSeries).filter(value -> value 
+        >= lowerBound 
         && value <= upperBound).toArray();
     }
 
@@ -120,7 +123,7 @@ public class TemperatureSeriesAnalysis {
     }
 
     public TempSummaryStatistics summaryStatistics() {
-        if (size == 0){
+        if (size == 0) {
             throw new IllegalArgumentException("Temperature series is empty.");
         }
 
@@ -129,7 +132,8 @@ public class TemperatureSeriesAnalysis {
 
     public int addTemps(double... temps) {
         int newSize = size + temps.length;
-        double[] newTemperatureSeries = Arrays.copyOf(temperatureSeries, newSize);
+        double[] newTemperatureSeries = Arrays.copyOf(temperatureSeries, 
+        newSize);
         System.arraycopy(temps, 0, newTemperatureSeries, size, temps.length);
         temperatureSeries = newTemperatureSeries;
         size = newSize;
