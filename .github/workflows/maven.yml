@@ -14,9 +14,12 @@ on:
   pull_request:
     branches: [ "master" ]
 
+permissions:
+  contents: write
+  checks: write
+
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -27,17 +30,23 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+
     - name: Test with Maven
       run: mvn -B test --file pom.xml
+
     - name: Build with Maven with checkstyle
       run: mvn -B verify checkstyle:checkstyle
+
     - uses: jwgmeligmeyling/checkstyle-github-action@master
       with:
         path: '**/checkstyle-result.xml'
+
     - name: Spotbugs
       run: mvn spotbugs:check
+
     - uses: jwgmeligmeyling/spotbugs-github-action@master
       with:
         path: '**/spotbugsXml.xml'
